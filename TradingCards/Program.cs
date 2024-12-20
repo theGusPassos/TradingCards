@@ -1,3 +1,4 @@
+using OpenSearch.Client;
 using TradingCards;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -8,6 +9,17 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+builder.Services.AddSingleton(s =>
+{
+    var openSearchSection = s.GetRequiredService<IConfiguration>().GetSection("OpenSearch");
+    var settings = new ConnectionSettings(new Uri(openSearchSection.GetValue<string>("Uri")!))
+        .BasicAuthentication("admin", openSearchSection.GetValue<string>("Password"))
+        // for local requests
+        .ServerCertificateValidationCallback((o, cert, chain, errors) => true);
+
+    return new OpenSearchClient(settings);
+});
 
 builder.Services.AddHostedService<CardLoader>();
 

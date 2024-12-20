@@ -2,20 +2,9 @@
 
 namespace TradingCards;
 
-public class CardLoader : BackgroundService
+public class CardLoader(OpenSearchClient client) : BackgroundService
 {
-    readonly OpenSearchClient client;
-
-    public CardLoader(IConfiguration configuration)
-    {
-        var openSearchSection = configuration.GetSection("OpenSearch");
-        var settings = new ConnectionSettings(new Uri(openSearchSection.GetValue<string>("Uri")!))
-            .BasicAuthentication("admin", openSearchSection.GetValue<string>("Password"))
-            // for local requests
-            .ServerCertificateValidationCallback((o, cert, chain, errors) => true);
-
-        client = new  OpenSearchClient(settings);
-    }
+    readonly OpenSearchClient client = client;
 
     protected override async Task ExecuteAsync(CancellationToken stoppingToken)
     {
