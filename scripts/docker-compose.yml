@@ -1,0 +1,13 @@
+version: "3.9"
+volumes:
+  opensearch:
+
+services:
+  opensearch:
+    image: "opensearchproject/opensearch:latest"
+    ports:
+      - "9200:9200"
+    environment:
+      OPENSEARCH_INITIAL_ADMIN_PASSWORD: "qwER43@!tsa"
+      OPENSEARCH_JAVA_OPTS: "-Xms512m -Xmx512m"
+      discovery.type: "single-node"

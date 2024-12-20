@@ -7,7 +7,16 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="OpenSearch.Client" Version="1.8.0" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EditorConfigFiles Remove="C:\Users\Gustavo\Documents\projects\card-search\TradingCards\TradingCards\.editorconfig" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="C:\Users\Gustavo\Documents\projects\card-search\TradingCards\TradingCards\.editorconfig" />
   </ItemGroup>
 
 </Project>
