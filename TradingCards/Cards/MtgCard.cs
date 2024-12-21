@@ -1,25 +1,36 @@
-﻿namespace TradingCards.Cards;
+﻿using System.Runtime.Serialization;
+
+namespace TradingCards.Cards;
 
 public class MtgCard : CardBase
 {
-    public required MtgColor Color { get; set; }
+    public MtgColor? Color { get; set; }
     public required MtgRarity Rarity { get; set; }
 }
 
 public enum MtgColor
 {
-    BLUE = 'U',
-    BLACK = 'B',
-    GREEN = 'G',
-    RED = 'R',
-    WHITE = 'W',
+    [EnumMember(Value = "U")]
+    BLUE,
+
+    [EnumMember(Value = "B")]
+    BLACK,
+
+    [EnumMember(Value = "G")]
+    GREEN,
+
+    [EnumMember(Value = "R")]
+    RED,
+
+    [EnumMember(Value = "W")]
+    WHITE,
 }
 
 public enum MtgRarity
 {
-    COMMON,
-    MYTHIC,
-    RARE,
-    SPECIAL,
-    UNCOMMON,
+    Common,
+    Mythic,
+    Rare,
+    Special,
+    Uncommon,
 }

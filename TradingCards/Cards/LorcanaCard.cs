@@ -1,18 +1,23 @@
-﻿namespace TradingCards.Cards;
+﻿using System.Runtime.Serialization;
+using System.Text.Json.Serialization;
+
+namespace TradingCards.Cards;
 
 public class LorcanaCard : CardBase
 {
     public required int InkCost { get; set; }
-    public required LorcanaRarity LorcanaRarity { get; set; }
+    public required LorcanaRarity Rarity { get; set; }
 }
 
 public enum LorcanaRarity
 {
-    COMMON,
-    ENCHANTED,
-    LEGENDARY,
-    PROMO,
-    RARE,
-    SUPER_RARE,
-    UNCOMMON,
+    Common,
+    Enchanted,
+    Legendary,
+    Promo,
+    Rare,
+    Uncommon,
+
+    [EnumMember(Value = "Super Rare")]
+    SuperRare,
 }
