@@ -1,9 +1,8 @@
 ﻿using TradingCards.Cards;
 
-namespace TradingCards.Controllers.Responses
+namespace TradingCards.Controllers.Responses;
+
+public class AutoCompleteResponse
 {
-    public class AutoCompleteResponse
-    {
-        public List<CardBase> Cards { get; set; } = []; 
-    }
+    public required List<CardBase> Cards { get; set; }
 }
