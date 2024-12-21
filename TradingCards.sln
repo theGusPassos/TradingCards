@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.9.34616.47
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TradingCards", "TradingCards\TradingCards.csproj", "{3CDCE1D7-DD1A-4277-ACF2-1ECA605A2781}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TradingCards", "TradingCards\TradingCards.csproj", "{3CDCE1D7-DD1A-4277-ACF2-1ECA605A2781}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TradingCards.IntegrationTests", "TradingCards.IntegrationTests\TradingCards.IntegrationTests.csproj", "{5C7618CE-38D9-4BBC-8D72-D944334FA6C9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{3CDCE1D7-DD1A-4277-ACF2-1ECA605A2781}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3CDCE1D7-DD1A-4277-ACF2-1ECA605A2781}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3CDCE1D7-DD1A-4277-ACF2-1ECA605A2781}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5C7618CE-38D9-4BBC-8D72-D944334FA6C9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5C7618CE-38D9-4BBC-8D72-D944334FA6C9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5C7618CE-38D9-4BBC-8D72-D944334FA6C9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5C7618CE-38D9-4BBC-8D72-D944334FA6C9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
