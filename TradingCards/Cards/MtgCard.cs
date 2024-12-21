@@ -4,7 +4,7 @@ namespace TradingCards.Cards;
 
 public class MtgCard : CardBase
 {
-    public override string Type => "Mtg";
+    public override CardType Type => CardType.MTG;
     public MtgColor? Color { get; set; }
     public required MtgRarity Rarity { get; set; }
 }

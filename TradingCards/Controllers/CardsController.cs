@@ -3,6 +3,7 @@ using OpenSearch.Client;
 using OpenSearch.Net;
 using System.Text.Json;
 using TradingCards.Cards;
+using TradingCards.Controllers.Filters;
 using TradingCards.Controllers.Responses;
 using TradingCards.Converters;
 
@@ -42,6 +43,11 @@ namespace TradingCards.Controllers
 
             var searchResponse = await client.LowLevel.SearchAsync<StringResponse>(PostData.Serializable(search));
             return JsonSerializer.Deserialize<AutoCompleteResponse>(searchResponse.Body, deserializationOptions)!;
+        }
+
+        [HttpGet("search")]
+        public async Task Filter([ModelBinder(BinderType = typeof(FilterConverter))] FilterBase query)
+        {
         }
     }
 }

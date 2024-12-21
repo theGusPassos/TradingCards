@@ -4,7 +4,7 @@ namespace TradingCards.Cards;
 
 public class LorcanaCard : CardBase
 {
-    public override string Type => "Lorcana";
+    public override CardType Type => CardType.LORCANA;
     public required int InkCost { get; set; }
     public required LorcanaRarity Rarity { get; set; }
 }

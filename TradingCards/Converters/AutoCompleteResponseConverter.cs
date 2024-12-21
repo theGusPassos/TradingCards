@@ -1,14 +1,13 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using System.Text.Json;
+﻿using System.Text.Json;
 using System.Text.Json.Serialization;
 using TradingCards.Cards;
-using TradingCards.Converters;
+using TradingCards.Controllers.Responses;
 
-namespace TradingCards.Controllers.Responses
+namespace TradingCards.Converters
 {
     public class AutoCompleteResponseConverter(CardTypeRegistry registry) : JsonConverter<AutoCompleteResponse>
     {
-        CardTypeRegistry registry = registry;
+        readonly CardTypeRegistry registry = registry;
 
         public override AutoCompleteResponse? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
         {
@@ -22,7 +21,7 @@ namespace TradingCards.Controllers.Responses
                 var index = hit.GetProperty("_index").GetString()!;
                 var type = registry.GetType(index);
                 var cardJson = hit.GetProperty("_source").GetRawText();
-                response.Cards.Add((CardBase) JsonSerializer.Deserialize(cardJson, type, Converters.Config.fromOpenSearchOptions)!);
+                response.Cards.Add((CardBase)JsonSerializer.Deserialize(cardJson, type, Config.fromOpenSearchOptions)!);
             }
 
             return response;

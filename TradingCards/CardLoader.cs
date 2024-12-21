@@ -1,5 +1,4 @@
 ﻿using OpenSearch.Client;
-using OpenSearch.Net;
 using System.Text.Json;
 using TradingCards.Cards;
 

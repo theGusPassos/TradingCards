@@ -1,9 +1,20 @@
-﻿namespace TradingCards.Cards
+﻿using System.Runtime.Serialization;
+
+namespace TradingCards.Cards
 {
     public abstract class CardBase
     {
-        public virtual string Type { get; set; } = string.Empty;
+        public virtual CardType Type { get; set; }
         public required string Id { get; set; }
         public required string Name { get; set; }
+    }
+
+    public enum CardType
+    {
+        [EnumMember(Value = "Mtg")]
+        MTG,
+
+        [EnumMember(Value = "Lorcana")]
+        LORCANA,
     }
 }
