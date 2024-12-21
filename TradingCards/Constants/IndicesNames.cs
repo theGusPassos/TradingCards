@@ -1,6 +1,6 @@
 ﻿namespace TradingCards.Constants
 {
-    public static class Indices
+    public static class IndicesNames
     {
         public static string MTG_CARDS = "mtg-cards";
         public static string LORCANA_CARDS = "lorcana-cards";

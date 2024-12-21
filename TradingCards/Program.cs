@@ -1,5 +1,8 @@
 using OpenSearch.Client;
 using TradingCards;
+using TradingCards.Cards;
+using TradingCards.Constants;
+using TradingCards.Converters;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -19,6 +22,14 @@ builder.Services.AddSingleton(s =>
         .ServerCertificateValidationCallback((o, cert, chain, errors) => true);
 
     return new OpenSearchClient(settings);
+});
+
+builder.Services.AddSingleton(b =>
+{
+    var cardTypeRegistry = new CardTypeRegistry();
+    cardTypeRegistry.Register<MtgCard>(IndicesNames.MTG_CARDS);
+    cardTypeRegistry.Register<LorcanaCard>(IndicesNames.LORCANA_CARDS);
+    return cardTypeRegistry;
 });
 
 builder.Services.AddHostedService<CardLoader>();
