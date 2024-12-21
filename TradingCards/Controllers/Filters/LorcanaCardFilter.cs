@@ -9,26 +9,34 @@ public class LorcanaCardFilter : FilterBase
     public int? InkCost { get; set; }
     public LorcanaRarity? Rarity { get; set; }
 
+    IEnumerable<Func<QueryContainerDescriptor<object>, QueryContainer>> BuildQuery()
+    {
+        var queries = new List<Func<QueryContainerDescriptor<object>, QueryContainer>>();
+
+        if (Name != null)
+        {
+            queries.Add(f => f.Term(t => t.Field("name").Value(Name)));
+        }
+
+        if (Rarity != null)
+        {
+            queries.Add(f => f.Term(t => t.Field("rarity").Value(Rarity)));
+        }
+
+        if (InkCost != null)
+        {
+            queries.Add(f => f.Term(t => t.Field("inkCost").Value(InkCost)));
+        }
+
+        return queries;
+    }
+
     public override Task<ISearchResponse<object>> Filter(OpenSearchClient client)
     {
-        return client.SearchAsync<object>(s => s.Index(IndicesNames.LORCANA_CARDS).Query(q => q.Bool(b =>
-        {
-            if (Name != null)
-            {
-                b.Should(s => s.Fuzzy(f => f.Field("name").Value(Name)));
-            }
-
-            if (Rarity != null)
-            {
-                b.Must(mu => mu.Term(t => t.Field("rarity").Value(Rarity)));
-            }
-
-            if (InkCost != null)
-            {
-                b.Must(mu => mu.Term(t => t.Field("inkCost").Value(Rarity)));
-            }
-
-            return b;
-        })));
+        return client.SearchAsync<object>(s => s
+            .Index(IndicesNames.LORCANA_CARDS)
+            .Query(q => q.Bool(b => b.Must(
+                BuildQuery()
+            ))));
     }
 }

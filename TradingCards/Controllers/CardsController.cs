@@ -22,7 +22,7 @@ public class CardsController(OpenSearchClient client, CardTypeRegistry cardRegis
     };
 
     [HttpGet("autocomplete")]
-    public async Task<AutoCompleteResponse> AutoComplete(string query)
+    public async Task<IActionResult> AutoComplete(string query)
     {
         var search = new
         {
@@ -39,10 +39,10 @@ public class CardsController(OpenSearchClient client, CardTypeRegistry cardRegis
         };
 
         var searchResponse = await client.LowLevel.SearchAsync<StringResponse>(PostData.Serializable(search));
-        return new AutoCompleteResponse
+        return Ok(new AutoCompleteResponse
         {
             Cards = JsonSerializer.Deserialize<List<CardBase>>(searchResponse.Body, openSearchSerializerOptions)!
-        };
+        });
     }
 
     [HttpGet("search")]
@@ -50,10 +50,6 @@ public class CardsController(OpenSearchClient client, CardTypeRegistry cardRegis
     {
         var searchResponse = await filter.Filter(client);
         var serializedCards = JsonSerializer.Serialize(searchResponse.Hits.Select(h => new { _index = h.Index, _source = h.Source }));
-
-        return Ok(new FilterResponse
-        {
-            Cards = JsonSerializer.Deserialize<List<CardBase>>(serializedCards, openSearchSerializerOptions)!
-        });
+        return Ok(new FilterResponse { Cards = JsonSerializer.Deserialize<List<CardBase>>(serializedCards, openSearchSerializerOptions)! });
     }
 }

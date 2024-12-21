@@ -13,6 +13,7 @@ builder.Services.AddControllers()
     .AddJsonOptions(options =>
     {
         options.JsonSerializerOptions.Converters.Add(new System.Text.Json.Serialization.JsonStringEnumConverter());
+        options.JsonSerializerOptions.Converters.Add(new CardsResponseConverter());
     });
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
@@ -41,7 +42,7 @@ builder.Services.AddSingleton(b =>
 {
     var filterTypeRegistry = new FilterTypeRegistry();
     filterTypeRegistry.Register<MtgCardFilter>(CardType.MTG.ToString());
-    filterTypeRegistry.Register<LorcanaCard>(CardType.LORCANA.ToString());
+    filterTypeRegistry.Register<LorcanaCardFilter>(CardType.LORCANA.ToString());
     return filterTypeRegistry;
 });
 

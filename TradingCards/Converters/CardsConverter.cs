@@ -37,7 +37,7 @@ namespace TradingCards.Converters
 
         public override void Write(Utf8JsonWriter writer, List<CardBase> value, JsonSerializerOptions options)
         {
-            throw new NotImplementedException();
+            JsonSerializer.Serialize(writer, (object)value, value.GetType(), options);
         }
     }
 }

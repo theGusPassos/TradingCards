@@ -3,8 +3,8 @@
 public class TypeRegistry
 {
     readonly Dictionary<string, Type> mappings = [];
-    public void Register<T>(string type) => mappings.Add(type, typeof(T));
-    public Type GetType(string type) => mappings[type];
+    public void Register<T>(string type) => mappings.Add(type.ToLower(), typeof(T));
+    public Type GetType(string type) => mappings[type.ToLower()];
 }
 
 public class CardTypeRegistry : TypeRegistry
